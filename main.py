@@ -99,3 +99,6 @@ if __name__ == "__main__":
  # Choose random restaurant and customer
 restaurant = session.query(Restaurant).order_by(func.random()).first()
 customer = session.query(Customer).order_by(func.random()).first()
+
+# Generate random star rating
+star_rating = random.randint(1, 5)
