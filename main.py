@@ -91,3 +91,6 @@ if __name__ == "__main__":
                 {"name": 'Sean Carter'},
                 {"name": 'Kendrick Lamar'}
             ]
+             # Loop through the customer data and add to the session
+            for customer_data in customers_data:
+                session.add(Customer(**customer_data))
