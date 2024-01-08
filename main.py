@@ -9,20 +9,25 @@ engine = create_engine("sqlite:///db.db")
 
 # Declare a base class for declarative models
 Base = declarative_base()
-# Define the Review class
-class Review(Base):
-    __tablename__ = "reviews"
+
+# Define the Restaurant class
+class Restaurant(Base):
+    __tablename__ = "restaurants"
 
     id = Column(Integer, primary_key=True)
-    star_rating = Column(Integer)
-    restaurant_id = Column(Integer, ForeignKey("restaurants.id"))
-    customer_id = Column(Integer, ForeignKey("customers.id"))
-    restaurant = relationship("Restaurant", back_populates="reviews")
-    customer = relationship("Customer", back_populates="reviews")
+    name = Column(String)
+    price = Column(Integer)
+    reviews = relationship("Review", back_populates="restaurant")
 
-    def __init__(self, star_rating, restaurant, customer):
-        self.star_rating = star_rating
-        self.restaurant = restaurant
-        self.customer = customer
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+    def __repr__(self):
+        return f"Restaurant: {self.name}, {self.price} dollars"
+# Define the Customer class
+class Customer(Base):
+    __tablename__ = "customers"
 
-
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    reviews = relationship("Review", back_populates="customer")
