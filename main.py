@@ -31,3 +31,9 @@ class Customer(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     reviews = relationship("Review", back_populates="customer")
+    
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return f"Customer: {self.name}"
