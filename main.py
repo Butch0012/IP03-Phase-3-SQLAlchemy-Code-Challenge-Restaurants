@@ -78,3 +78,6 @@ if __name__ == "__main__":
                 {"name": 'ExtraOrdinary Ugali', "price": 35},
                 {"name": 'Poly Nyama Choma', "price": 12}
             ]
+            # Loop through the restaurant data and add to the session
+            for restaurant_data in restaurants_data:
+                session.add(Restaurant(**restaurant_data))
