@@ -81,3 +81,13 @@ if __name__ == "__main__":
             # Loop through the restaurant data and add to the session
             for restaurant_data in restaurants_data:
                 session.add(Restaurant(**restaurant_data))
+                 # Add customers if not present
+        if not session.query(Customer).count():
+            customers_data = [
+                {"name": 'John Mbaru'},
+                {"name": 'Wangachi'},
+                {"name": 'Mwangi Ace'},
+                {"name": 'Sankofa King'},
+                {"name": 'Sean Carter'},
+                {"name": 'Kendrick Lamar'}
+            ]
