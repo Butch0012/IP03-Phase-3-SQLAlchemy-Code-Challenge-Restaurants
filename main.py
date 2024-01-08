@@ -94,3 +94,5 @@ if __name__ == "__main__":
              # Loop through the customer data and add to the session
             for customer_data in customers_data:
                 session.add(Customer(**customer_data))
+     # Commit changes to the database
+    session.commit()     
