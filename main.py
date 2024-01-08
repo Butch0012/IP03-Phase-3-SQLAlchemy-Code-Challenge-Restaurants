@@ -1,4 +1,3 @@
-User
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
@@ -73,6 +72,7 @@ if __name__ == "__main__":
     with sessionmaker(bind=engine)() as session:
         # Add restaurants if not present
         if not session.query(Restaurant).count():
+            # Sample restaurant data
             restaurants_data = [
                 {"name": 'Shicken Wangs Place', "price": 15},
                 {"name": 'Rib Shack', "price": 18},
@@ -85,6 +85,7 @@ if __name__ == "__main__":
 
         # Add customers if not present
         if not session.query(Customer).count():
+            # Sample customer data
             customers_data = [
                 {"name": 'John Mbaru'},
                 {"name": 'Wangachi'},
@@ -114,6 +115,12 @@ if __name__ == "__main__":
                 restaurant=restaurant,
                 customer=customer
             )
-             # Add review to session
+
+            # Add the review to the session
             session.add(review)
             session.commit()
+
+        except Exception as e:
+            print(f"Error generating review: {e}")
+
+        
