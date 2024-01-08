@@ -96,3 +96,6 @@ if __name__ == "__main__":
                 session.add(Customer(**customer_data))
      # Commit changes to the database
     session.commit()     
+ # Choose random restaurant and customer
+restaurant = session.query(Restaurant).order_by(func.random()).first()
+customer = session.query(Customer).order_by(func.random()).first()
