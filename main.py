@@ -6,3 +6,6 @@ import random
 
 # Create the SQLite database engine
 engine = create_engine("sqlite:///db.db")
+
+# Declare a base class for declarative models
+Base = declarative_base()
