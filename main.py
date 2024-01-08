@@ -48,8 +48,11 @@ class Review(Base):
     customer_id = Column(Integer, ForeignKey("customers.id"))
     restaurant = relationship("Restaurant", back_populates="reviews")
     customer = relationship("Customer", back_populates="reviews")
-    
+
     def __init__(self, star_rating, restaurant, customer):
         self.star_rating = star_rating
         self.restaurant = restaurant
         self.customer = customer
+    def review_customer(self):
+        # Get the Customer instance for this review
+        return Customer.query.get(self.customer_id)
