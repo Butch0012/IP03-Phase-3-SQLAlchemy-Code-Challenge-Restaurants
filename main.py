@@ -56,3 +56,6 @@ class Review(Base):
     def review_customer(self):
         # Get the Customer instance for this review
         return Customer.query.get(self.customer_id)
+    def review_restaurant(self):
+        # Get the Restaurant instance for this review
+        return Restaurant.query.get(self.restaurant_id)
