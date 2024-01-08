@@ -1,3 +1,4 @@
+User
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
@@ -81,7 +82,8 @@ if __name__ == "__main__":
             # Loop through the restaurant data and add to the session
             for restaurant_data in restaurants_data:
                 session.add(Restaurant(**restaurant_data))
-                 # Add customers if not present
+
+        # Add customers if not present
         if not session.query(Customer).count():
             customers_data = [
                 {"name": 'John Mbaru'},
@@ -91,14 +93,27 @@ if __name__ == "__main__":
                 {"name": 'Sean Carter'},
                 {"name": 'Kendrick Lamar'}
             ]
-             # Loop through the customer data and add to the session
+            # Loop through the customer data and add to the session
             for customer_data in customers_data:
                 session.add(Customer(**customer_data))
-     # Commit changes to the database
-    session.commit()     
- # Choose random restaurant and customer
-restaurant = session.query(Restaurant).order_by(func.random()).first()
-customer = session.query(Customer).order_by(func.random()).first()
 
-# Generate random star rating
-star_rating = random.randint(1, 5)
+        # Commit changes to the database
+        session.commit()
+
+        # Choose random restaurant and customer
+        restaurant = session.query(Restaurant).order_by(func.random()).first()
+        customer = session.query(Customer).order_by(func.random()).first()
+
+        # Generate random star rating
+        star_rating = random.randint(1, 5)
+
+        try:
+            # Create a new review
+            review = Review(
+                star_rating=star_rating,
+                restaurant=restaurant,
+                customer=customer
+            )
+             # Add review to session
+            session.add(review)
+            session.commit()
