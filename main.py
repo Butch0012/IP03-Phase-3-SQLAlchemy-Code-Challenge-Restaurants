@@ -59,3 +59,6 @@ class Review(Base):
     def review_restaurant(self):
         # Get the Restaurant instance for this review
         return Restaurant.query.get(self.restaurant_id)
+    if __name__ == "__main__":
+    # Create all tables in the engine
+    Base.metadata.create_all(engine)
