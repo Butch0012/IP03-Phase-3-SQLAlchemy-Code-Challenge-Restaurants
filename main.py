@@ -22,8 +22,10 @@ class Restaurant(Base):
     def __init__(self, name, price):
         self.name = name
         self.price = price
+
     def __repr__(self):
         return f"Restaurant: {self.name}, {self.price} dollars"
+
 # Define the Customer class
 class Customer(Base):
     __tablename__ = "customers"
@@ -37,7 +39,7 @@ class Customer(Base):
 
     def __repr__(self):
         return f"Customer: {self.name}"
-    
+
 # Define the Review class
 class Review(Base):
     __tablename__ = "reviews"
@@ -53,12 +55,26 @@ class Review(Base):
         self.star_rating = star_rating
         self.restaurant = restaurant
         self.customer = customer
+
     def review_customer(self):
         # Get the Customer instance for this review
         return Customer.query.get(self.customer_id)
+
     def review_restaurant(self):
         # Get the Restaurant instance for this review
         return Restaurant.query.get(self.restaurant_id)
-    if __name__ == "__main__":
+
+if __name__ == "__main__":
     # Create all tables in the engine
     Base.metadata.create_all(engine)
+
+    # Create a session to interact with the database
+    with sessionmaker(bind=engine)() as session:
+        # Add restaurants if not present
+        if not session.query(Restaurant).count():
+            restaurants_data = [
+                {"name": 'Shicken Wangs Place', "price": 15},
+                {"name": 'Rib Shack', "price": 18},
+                {"name": 'ExtraOrdinary Ugali', "price": 35},
+                {"name": 'Poly Nyama Choma', "price": 12}
+            ]
